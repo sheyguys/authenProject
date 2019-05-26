@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit {
 
   input: any = {
     stuid: '',
-    major: ''
+    major: '',
+    email: ''
   }
 
   user: firebase.User;
@@ -47,11 +48,13 @@ export class ProfileComponent implements OnInit {
   }
 
   confirm() {
+    console.log(this.input.email);
     console.log(this.input.stuid);
     console.log(this.input.major);
     if (this.input.stuid === '' || this.input.major === '') {
       alert('Please enter studentId and Major');
     } else {
+      this.users.email = this.input.email;
       this.users.studentId = this.input.stuid;
       this.users.major = this.input.major;
       console.log(this.users);
@@ -77,6 +80,10 @@ export class ProfileComponent implements OnInit {
 
   profile(){
     this.router.navigate(['/profile']);
+  }
+
+  aboutme(){
+    this.router.navigate(['/aboutme']);
   }
 
 }

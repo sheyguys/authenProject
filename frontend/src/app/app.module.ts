@@ -21,10 +21,12 @@ import { AuthenService } from './service/authen.service';
 import { ProfileService } from './service/profile.service';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AboutmeComponent } from './aboutme/aboutme.component';
 
 const appRoutes: Routes = [
   {path:'login' , component:LoginComponent},
-  {path:'profile' , component:ProfileComponent}
+  {path:'profile' , component:ProfileComponent},
+  {path:'aboutme' , component:AboutmeComponent}
 ];
 
 @NgModule({
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     ToolbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    AboutmeComponent
   ],
   imports: [
     BrowserModule,
