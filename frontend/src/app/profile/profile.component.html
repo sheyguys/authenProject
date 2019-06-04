@@ -51,18 +51,36 @@
     </mat-card-header>
     <mat-card-content>
         <form class="my-form">
-            <mat-form-field class="full-width" *ngIf="!user?.email">
+            <mat-form-field class="full-width" *ngIf="!user?.email" [class.has-error]="email.invalid && email.touched"> 
                 <mat-label>Email</mat-label>
-                <input  matInput  [(ngModel)]="input.email" placeholder="Email" name="email"  required>
+                  <input  matInput  [(ngModel)]="input.email" placeholder="Email" required email name="email" #email="ngModel" class="form-control">
+                  <span class="help-block" *ngIf="email.errors?.required && email.touched">
+                    Email is required
+                  </span>
+                  <span class="help-block" *ngIf="email.errors?.email && email.touched">
+                    Email is invalid
+                  </span>
              </mat-form-field>
-            <mat-form-field class="full-width">
+            <mat-form-field class="full-width" [class.has-error]="studentId.invalid && studentId.touched">
                 <mat-label>Student ID.</mat-label>
-                <input  matInput  [(ngModel)]="input.stuid" placeholder="Student ID." name="studentId"  required>
+                  <input  matInput  [(ngModel)]="input.stuid" placeholder="Student ID." required name="studentId" #studentId="ngModel" class="form-control" pattern="^[Bb]([0-9]{7})">
+                  <span class="help-block" *ngIf="studentId.errors?.required && studentId.touched">
+                    Student ID. is required
+                  </span>
+                  <span class="help-block" *ngIf="studentId.errors?.pattern && studentId.touched">
+                    Student ID. is invalid
+                  </span>
              </mat-form-field>
-             <mat-form-field class="full-width">
+             <mat-form-field class="full-width" [class.has-error]="major.invalid && major.touched">
               <mat-label>Major</mat-label>
-              <input  matInput  [(ngModel)]="input.major" placeholder="Major" name="major"   required>
-          </mat-form-field>
+                <input  matInput  [(ngModel)]="input.major" placeholder="Major" required name="major" #major="ngModel" class="form-control"> 
+                <span class="help-block" *ngIf="major.errors?.required && major.touched">
+                    Major is required
+                  </span>
+                  <!-- <span class="help-block" *ngIf="major.errors?.pattern && major.touched">
+                    Major is invalid
+                  </span> -->
+              </mat-form-field>
         </form>
       </mat-card-content>
       <mat-card-actions>

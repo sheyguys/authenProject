@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 
 import { environment } from '../environments/environment';
@@ -64,6 +64,7 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp( environment.firebase),
     AngularFireAuthModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [AuthenService, ProfileService],

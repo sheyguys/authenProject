@@ -15,12 +15,14 @@ export class AboutmeComponent implements OnInit {
   constructor(
     private service: AuthenService, private route: ActivatedRoute, private router: Router
   ) { }
-
+  picURL: string;
   ngOnInit() {
     this.service.getLoggedInUser()
       .subscribe( user => {
         console.log( user );
         this.user = user;
+        this.picURL = this.user.photoURL;
+        console.log(this.picURL);
       }); 
   }
   logout() {
