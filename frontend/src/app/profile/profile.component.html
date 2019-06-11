@@ -73,13 +73,13 @@
              </mat-form-field>
              <mat-form-field class="full-width" [class.has-error]="major.invalid && major.touched">
               <mat-label>Major</mat-label>
-                <input  matInput  [(ngModel)]="input.major" placeholder="Major" required name="major" #major="ngModel" class="form-control"> 
+                <input  matInput  [(ngModel)]="input.major" placeholder="Major" required name="major" #major="ngModel" class="form-control" pattern="^([A-z*' '])+|^([ก-๙*' ']+)"> 
                 <span class="help-block" *ngIf="major.errors?.required && major.touched">
                     Major is required
                   </span>
-                  <!-- <span class="help-block" *ngIf="major.errors?.pattern && major.touched">
+                  <span class="help-block" *ngIf="major.errors?.pattern && major.touched">
                     Major is invalid
-                  </span> -->
+                  </span>
               </mat-form-field>
         </form>
       </mat-card-content>
