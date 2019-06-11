@@ -1,73 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule, MatTableModule,
-  MatSidenavModule, MatCheckboxModule, MatDialogModule, MatBadgeModule, MatIconModule, MatSelectModule,  MatDatepickerModule,
-  MatGridListModule, MatNativeDateModule, MatMenuModule, MatRadioModule} from '@angular/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router'
+
 import { AppComponent } from './app.component';
-import { RouterModule, Routes } from '@angular/router';
+import { UserService } from './shared/user.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+import { UserComponent } from './user/user.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
+import { HomeComponent } from './home/home.component';
+import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { appRoutes } from './routes';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-
-import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
-
-import { AuthenService } from './service/authen.service';
-import { ProfileService } from './service/profile.service';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AboutmeComponent } from './aboutme/aboutme.component';
-
-const appRoutes: Routes = [
-  {path:'login' , component:LoginComponent},
-  {path:'profile' , component:ProfileComponent},
-  {path:'aboutme' , component:AboutmeComponent}
-];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    ToolbarComponent,
-    ProfileComponent,
-    AboutmeComponent
+    SignUpComponent,
+    UserComponent,
+    SignInComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    MatCardModule,
-    MatInputModule,
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatGridListModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatTableModule,
-    MatSidenavModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatBadgeModule,
-    RouterModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    NoopAnimationsModule,
-    MDBBootstrapModule.forRoot(),
-    RouterModule.forRoot(appRoutes),
-    AngularFireModule.initializeApp( environment.firebase),
-    AngularFireAuthModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthenService, ProfileService],
+  providers: [UserService,AuthGuard,
+    ,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass : AuthInterceptor,
+      multi : true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
